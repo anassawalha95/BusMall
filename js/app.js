@@ -158,10 +158,10 @@ function renderer(event) {
             thirdImg.setAttribute('src', product3.filePath)
 
             roundCounter++
-            console.log(allProductsObjects)
+
         } else {
 
-            console.log(allProductsObjects)
+
             renderChart()
         }
 
@@ -225,18 +225,13 @@ thirdVote.addEventListener('click', renderer, true)
 function renderChart() {
     var imagesCopy = images
     imagesCopy = imagesCopy.map(val => val.slice(0, val.indexOf(".")))
-    console.log(imagesCopy)
+
     var clicked = []
     var shown = []
     allProductsObjects.map(val => {
         clicked.push(val.clicked)
         shown.push(val.shown)
     })
-
-    console.log(clicked)
-    console.log(shown)
-
-    console.log(allProductsObjects)
 
     var ctx = document.getElementById('Chart').getContext('2d');
     var myChart = new Chart(ctx, {
@@ -250,18 +245,18 @@ function renderChart() {
             datasets: [{
                 label: 'Shown',
                 data: shown,
-                backgroundColor: 'blue',
+                backgroundColor: '#b3cdd1',
                 borderColor: 'gray',
-                borderWidth: 2,
+                borderWidth: 1,
 
 
             },
             {
                 label: 'Clicked',
                 data: clicked,
-                backgroundColor: 'orange',
+                backgroundColor: '#B9ABCF',
                 borderColor: 'gray',
-                borderWidth: 2,
+                borderWidth: 1,
 
             }]
         },

@@ -83,12 +83,13 @@ header{
 }
 
 .round-number-label{
-    color: black;
+    color: #6d6d6d;
     display: block;
     padding: 17px;
-    letter-spacing: 7px;
-    font-family: system-ui;
-    font-weight: bolder;
+    letter-spacing: 5px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+
     
 }
 

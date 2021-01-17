@@ -1,16 +1,18 @@
-html{
-    
-}
+
 body{
     width: 100%;
     height: 100%;
+    background-color: #fee2f8;
+background-image: linear-gradient(315deg, #fee2f8 0%, #dcf8ef 74%);
+
 }
 
 header{
     width: 100%;
     height: 580px;
-    background-image:  linear-gradient(to top, #e2a602  0%, #e6d600 50%, #e6d600 51%, #ff660033 100%);
-    border-bottom: solid 2px #00b4db;
+    background-image:   linear-gradient(to right, #200122, #6f0000);
+
+
 
 }
 
@@ -28,12 +30,11 @@ header{
     font-size: 42px;
     font-weight: bold;
     text-align: start;
-    text-shadow: 6px 6px 0px #00b4db;
+    text-shadow: 6px 6px 0px #6f0000;
     color: white;
     letter-spacing: 7px;
 
-    text-decoration: underline;
-    text-decoration-color: #00b4db;
+ 
     
 
 }
@@ -44,7 +45,7 @@ header{
     font-family: "Raleway", sans-serif;
     font-size: 55px;
     font-weight: bold;
-    text-shadow: 3px 3px 0px#00b4db;
+    text-shadow: 3px 3px 0px#6f0000;
     color: white;
 
 }
@@ -56,7 +57,7 @@ header{
     color: white;
     font-size: 32px;
     font-weight: 300;
-    text-shadow: 3px 3px 0px #00b4db;
+    text-shadow: 3px 3px 0px #6f0000;
 
 
 }
@@ -67,12 +68,14 @@ header{
     margin: 25px auto;
     width: 500px;
     height: 185px;
-    background-image: linear-gradient(to top, #e2a602  0%, #e6d600 50%, #e6d600 51%, #f0f0f0c4 100%);
+    background-color: #f6f4f3;
     border-radius: 7px;
     text-align: center;
+
+ 
     box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.2);
-    border-left: solid 2px #00b4db;
-border-right: solid 2px #00b4db ;
+    border-left: solid 7px #00b4db;
+    border-right: solid 7px #00b4db;
 }
 
 .controll-rounds-number>form{
@@ -80,13 +83,13 @@ border-right: solid 2px #00b4db ;
 }
 
 .round-number-label{
-    
+    color: black;
     display: block;
     padding: 17px;
     letter-spacing: 7px;
     font-family: system-ui;
     font-weight: bolder;
-    color: rgb(255, 255, 255);
+    
 }
 
 #roundNumber{
@@ -141,7 +144,7 @@ border-right: solid 2px #00b4db ;
 
 
 main{
-    background-color: #d1d1d188;
+    
     height: 540px;
 }
 
@@ -167,10 +170,10 @@ width: 350px;
 height: 450px;
 background-color: white;
 border-radius: 5px;
-background-image: linear-gradient(to top, #e2a602  0%, #e6d600 50%, #e6d600 51%, #ff660000 100%);;
+background-image: linear-gradient(to top, #e2a602 -47%,#6f0000 50%, #210122 105%,#6f0000 100%);
 box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.2);
-border-left: solid 2px #00b4db;
-border-right: solid 2px #00b4db ;
+border-left: solid 7px #00b4db;
+    border-right: solid 7px #00b4db;
 }
 
 .column > img{
@@ -208,7 +211,7 @@ border-right: solid 2px #00b4db ;
 
  
 .item-name{
-    color: rgb(51, 32, 3);
+    color: #00b4db;
     text-align: center;
     font-size: 32px;
     text-transform:capitalize ;
@@ -249,3 +252,83 @@ border-right: solid 2px #00b4db ;
 }
 
 
+
+
+.statistics{
+    padding: 25px;
+    text-align: center;
+    font-family: "Raleway", sans-serif;
+    font-size: 55px;
+    font-weight: bold;
+    text-shadow: 3px 3px 0px#a3a3a39c;
+    color: #6f0000;
+    margin-top: 70px;
+  
+
+
+}
+.statistics-box{
+    display: block;
+    margin: 0 auto;
+
+    
+    
+}
+
+
+.line{
+    background-color:#6f0000;
+    width: 300px;
+    height: 3px;
+    display: block;
+    margin: 0 auto;
+    opacity: 0.7;   
+}
+
+
+.social-media-container{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 150px;
+
+    background-color: #444444;
+
+    margin-top: 200px;
+}
+
+.social-media-container > i {
+
+    padding: 25px;
+    font-size: 60px;
+
+    transition: 0.5;
+    
+}
+.social-media-container > i:hover {
+
+    color:#56a7f3 ;
+    
+}
+
+.social-media-container > hr {
+
+    width: 40%;
+    margin: 0;
+    background-color:#6f0000;
+    height: 1px;
+    border: none;
+}
+
+.copy-right{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70px;
+    color: white;
+    background-color:  #6f0000;
+    font-size: 32px;
+}

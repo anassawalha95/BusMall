@@ -214,7 +214,7 @@ function renderer(event) {
 
 
 renderer()
-
+renderChart()
 
 
 firstVote.addEventListener('click', renderer, true)
@@ -252,7 +252,8 @@ function renderChart() {
                 data: shown,
                 backgroundColor: 'blue',
                 borderColor: 'gray',
-                borderWidth: 2
+                borderWidth: 2,
+
 
             },
             {
@@ -260,10 +261,12 @@ function renderChart() {
                 data: clicked,
                 backgroundColor: 'orange',
                 borderColor: 'gray',
-                borderWidth: 2
+                borderWidth: 2,
+
             }]
         },
         options: {
+
             scales: {
                 yAxes: [{
                     ticks: {
@@ -273,30 +276,32 @@ function renderChart() {
                         stepSize: 2,
                     }
                 }],
-                xAxes: [{
-                    ticks: {
-                        max: 20,
-                        min: 0,
-                        beginAtZero: 0,
-                        stepSize: 2,
-                    }
-                }]
+
             },
 
             layout: {
                 padding: {
-                    left: 0,
-                    right: 0,
-                    top: 0,
-                    bottom: 0
+                    left: 50,
+                    right: 50,
+                    top: 50,
+                    bottom: 50
                 },
-                fontSize: "18",
 
-                width: "70",
-                height: "500px",
-                fullWidth: false
             },
+
+            legend: {
+                labels: {
+
+                    fontColor: 'red',
+
+                }
+            }
 
         }
     });
+
+    myChart.canvas.parentNode.style.width = '60%';
+    myChart.canvas.parentNode.style.height = '400px';
+
+
 }

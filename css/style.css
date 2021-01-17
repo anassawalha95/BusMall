@@ -1,0 +1,251 @@
+html{
+    
+}
+body{
+    width: 100%;
+    height: 100%;
+}
+
+header{
+    width: 100%;
+    height: 580px;
+    background-image:  linear-gradient(to top, #e2a602  0%, #e6d600 50%, #e6d600 51%, #ff660033 100%);
+    border-bottom: solid 2px #00b4db;
+
+}
+
+.logo{
+
+        padding-top: 100px;
+        padding-left: 100px;
+        padding-bottom: 30px;
+        
+}
+
+.logo-name{
+    color: black;
+    font-family: 'Pacifico', cursive;
+    font-size: 42px;
+    font-weight: bold;
+    text-align: start;
+    text-shadow: 6px 6px 0px #00b4db;
+    color: white;
+    letter-spacing: 7px;
+
+    text-decoration: underline;
+    text-decoration-color: #00b4db;
+    
+
+}
+
+
+.sub-logo-first{
+    text-align: center;
+    font-family: "Raleway", sans-serif;
+    font-size: 55px;
+    font-weight: bold;
+    text-shadow: 3px 3px 0px#00b4db;
+    color: white;
+
+}
+
+.sub-logo-second{
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Righteous', cursive;
+    color: white;
+    font-size: 32px;
+    font-weight: 300;
+    text-shadow: 3px 3px 0px #00b4db;
+
+
+}
+
+.controll-rounds-number{
+
+    display: block;
+    margin: 25px auto;
+    width: 500px;
+    height: 185px;
+    background-image: linear-gradient(to top, #e2a602  0%, #e6d600 50%, #e6d600 51%, #f0f0f0c4 100%);
+    border-radius: 7px;
+    text-align: center;
+    box-shadow: 0px 0px 5px 4px rgba(0,0,0,0.2);
+    border-left: solid 2px #00b4db;
+border-right: solid 2px #00b4db ;
+}
+
+.controll-rounds-number>form{
+    padding:25px ;
+}
+
+.round-number-label{
+    
+    display: block;
+    padding: 17px;
+    letter-spacing: 7px;
+    font-family: system-ui;
+    font-weight: bolder;
+    color: rgb(255, 255, 255);
+}
+
+#roundNumber{
+    width: 77%;
+    height: 27px;
+    display: block;
+    margin: auto;
+    border-color: #e6e6e6;
+    border-radius: 5px;
+    transition: 1s;
+    outline-color:#00b4db;
+    
+    
+}
+
+#round-number:focus{
+    border-color: #0083b0;
+    outline-color: #0083b0;
+    
+}
+
+
+.controll-rounds-number > form> .submit-button{
+    display: block;
+    margin: auto;
+    margin-top: 15px;
+    padding: 10px 67px;
+    border: none;
+    color: white;
+    border-radius: 2px;
+    background-image: linear-gradient(50deg, #00b4db, #0083b0);
+
+    box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: 1s;
+}
+
+
+.controll-rounds-number > form> .submit-button:hover{
+
+    background-image: linear-gradient(250deg, #0083b0, #ffe600); 
+}
+
+.controll-rounds-number > form> .submit-button:active{
+
+ 
+   
+    background-image: linear-gradient(250deg, #0083b0, #ffe600); 
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.2);
+  
+}
+
+
+main{
+    background-color: #d1d1d188;
+    height: 540px;
+}
+
+.container{
+    z-index: 2;
+    bottom: 48px;
+    position: relative;
+    width: 100%;
+    height: 350px;
+    
+}
+
+.row{
+    display: flex;
+    align-items: center;
+
+    justify-content: space-around;
+}
+
+
+.column{
+width: 350px;
+height: 450px;
+background-color: white;
+border-radius: 5px;
+background-image: linear-gradient(to top, #e2a602  0%, #e6d600 50%, #e6d600 51%, #ff660000 100%);;
+box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.2);
+border-left: solid 2px #00b4db;
+border-right: solid 2px #00b4db ;
+}
+
+.column > img{
+    display: block;
+    margin: 15px auto;
+    width: 320px;
+    height: 320px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.2);
+    border-top: solid 2px #00b4db;
+    border-bottom: solid 2px #00b4db ;
+}
+
+.vote{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px 50px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: bolder;
+    cursor: pointer;
+    text-shadow: 0px 0px 1px #00b4db;
+
+}
+.vote:hover{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px 50px;
+    text-decoration: none;
+    animation: changingBackGroundColor cubic-bezier(.17,.67,.91,.39) 5s   ;
+    background-color: #0083b0;
+}
+
+ 
+.item-name{
+    color: rgb(51, 32, 3);
+    text-align: center;
+    font-size: 32px;
+    text-transform:capitalize ;
+    text-shadow: 0px 0px 2px  #00b4db;
+}
+
+.vote > i {
+    color: rgb(255, 209, 124);
+    animation: rotating 2s linear infinite;
+    
+}
+
+.vote > i:hover {
+    color: lightblue;
+
+    animation: rotating 1s linear infinite;
+    
+}
+
+@keyframes rotating {
+    from {
+       
+        transform: rotate(0deg);
+      }
+      to {
+        
+        transform: rotate(360deg);
+      }
+    }
+
+@keyframes changingBackGroundColor {
+        0%   {background-color: #00b7ff;}
+        25%  {background-color: #065081;}
+        50%  {background-color: #56a7f3;}
+        75%  {background-color: rgb(0, 100, 139);}
+        100% {background-color: #0083b0;}
+        
+}
+
+

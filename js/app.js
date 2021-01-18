@@ -243,7 +243,7 @@ function renderChart() {
     products.prototype.allProductsObjects.map(val => {
         clicked.push(val.clicked)
         shown.push(val.shown)
-        shownPercentage.push((val.clicked == 0 ? 0 : (val.clicked * 100 / imagesCopy.length)))
+        shownPercentage.push((val.clicked == 0 ? 0 : ((val.clicked / val.shown) * 100)))
     })
 
     console.log(shownPercentage)

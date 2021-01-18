@@ -1,6 +1,6 @@
 'use strict'
 
-// all variables definition
+// all global variables definition
 var d = document;
 var generatedNumbers = [];
 
@@ -22,6 +22,8 @@ var thirdVote = d.getElementById('vote3');
 var maxRounds = 25;
 var roundCounter = 0
 var maxRounndSubmitionListener = d.getElementById('submitRoundNumber')
+
+var redo = d.getElementById('redo');
 
 var product1
 var product2
@@ -230,6 +232,18 @@ renderChart()
 firstVote.addEventListener('click', renderer, true)
 secondVote.addEventListener('click', renderer, true)
 thirdVote.addEventListener('click', renderer, true)
+
+
+// adding redo listner
+redo.addEventListener('click', allowUserToRedo, true)
+
+function allowUserToRedo() {
+
+    location.reload();
+
+
+}
+
 
 
 // main chart renderer function

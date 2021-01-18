@@ -110,8 +110,8 @@ header{
 
 
 .controll-rounds-number > form> .submit-button{
-    display: block;
-    margin: auto;
+    display: inline-block;
+
     margin-top: 15px;
     padding: 10px 67px;
     border: none;
@@ -124,6 +124,20 @@ header{
     transition: 1s;
 }
 
+#redo{
+   
+    
+    font-size: 30px;
+    margin-left: 10px;
+    vertical-align: middle;
+    color: #00b7ff ;
+}
+
+#redo:hover{
+   cursor: pointer;
+   animation: rotating 1s linear infinite; ;
+    
+}
 
 .controll-rounds-number > form> .submit-button:hover{
 
@@ -331,3 +345,5 @@ main{
     background-color:   #E8A87C;
     font-size: 15px;
 }
+
+

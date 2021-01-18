@@ -15,12 +15,11 @@ var firstImg = d.getElementById('firstImg');
 var secondImg = d.getElementById('secondImg');
 var thirdImg = d.getElementById('thirdImg');
 
-var firstVote = d.getElementById('vote1');
-var secondVote = d.getElementById('vote2');
-var thirdVote = d.getElementById('vote3');
+var imagesSection = d.getElementById('row');
 
 var maxRounds = 25;
 var roundCounter = 0
+var roundNumber = d.getElementById('roundNumber')
 var maxRounndSubmitionListener = d.getElementById('submitRoundNumber')
 
 var redo = d.getElementById('redo');
@@ -32,6 +31,9 @@ var product3
 var generate1
 var generate2
 var generate3
+
+var showResults = d.getElementById("showResults")
+var statistics = d.getElementById("statistics-box")
 
 
 var images = [
@@ -65,7 +67,7 @@ maxRounndSubmitionListener.addEventListener('click', changeMaxRounds)
 function changeMaxRounds(event) {
 
     event.preventDefault();
-    maxRounds = d.getElementById('roundNumber').value;
+    maxRounds = roundNumber.value;
 
 }
 
@@ -109,19 +111,23 @@ function products(name, filePath) {
 
 // main rendering function for all the images 
 
+var notFirstTimeFlag = false;
 function renderer(event) {
 
-    if (event) {
+    if (notFirstTimeFlag) {
+
         if (roundCounter <= maxRounds) {
             if (event.target.id == "vote1") {
                 product1.clicked++;
-            }
-            if (event.target.id == "vote2") {
-                product2.clicked++;
-            }
-            if (event.target.id == "vote3") {
-                product3.clicked++;
-            }
+            } else
+                if (event.target.id == "vote2") {
+                    product2.clicked++;
+                } else
+                    if (event.target.id == "vote3") {
+                        product3.clicked++;
+                    } else {
+                        return
+                    }
 
             product1.shown++;
             product2.shown++;
@@ -172,14 +178,11 @@ function renderer(event) {
 
             roundCounter++
 
-        } else {
-
-
-            renderChart()
         }
 
-    } else {
 
+    } else {
+        notFirstTimeFlag = true;
         generate1 = generateRandomNumber();
 
 
@@ -226,15 +229,14 @@ function renderer(event) {
 }
 
 
+
+
 renderer()
 renderChart()
 
 // adding click event listner on images
 
-firstVote.addEventListener('click', renderer, true)
-secondVote.addEventListener('click', renderer, true)
-thirdVote.addEventListener('click', renderer, true)
-
+imagesSection.addEventListener('click', renderer)
 
 // adding redo listner
 redo.addEventListener('click', allowUserToRedo, true)
@@ -248,8 +250,15 @@ function allowUserToRedo() {
 
 
 
+// adding show results listener
+showResults.addEventListener('click', renderChart)
+
+
 // main chart renderer function
-function renderChart() {
+function renderChart(e) {
+
+
+
     var imagesCopy = images
     imagesCopy = imagesCopy.map(val => val.slice(0, val.indexOf(".")))
 
@@ -342,5 +351,23 @@ function renderChart() {
     myChart.canvas.parentNode.style.width = '60%';
     myChart.canvas.parentNode.style.height = '400px';
 
+    if (e) {
+        e.preventDefault()
+
+        roundNumber.disabled = true;
+
+        maxRounndSubmitionListener.disabled = true;
+        showResults.disabled = true;
+
+        maxRounndSubmitionListener.style.opacity = 0.3;
+        showResults.style.opacity = 0.3;
+
+        maxRounndSubmitionListener.style.cursor = "initial";
+        showResults.style.cursor = "initial";
+
+
+        showResults.removeEventListener('click', renderChart)
+        maxRounds = 0
+    }
 
 }

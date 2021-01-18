@@ -239,10 +239,15 @@ function renderChart() {
 
     var clicked = []
     var shown = []
+    var shownPercentage = []
     products.prototype.allProductsObjects.map(val => {
         clicked.push(val.clicked)
         shown.push(val.shown)
+        shownPercentage.push((val.clicked == 0 ? 0 : (val.clicked * 100 / imagesCopy.length)))
     })
+
+    console.log(shownPercentage)
+
 
     var ctx = document.getElementById('Chart').getContext('2d');
     var myChart = new Chart(ctx, {
@@ -253,24 +258,36 @@ function renderChart() {
             barThickness: 6,
             maxBarThickness: 2,
             minBarLength: 2,
-            datasets: [{
+            datasets: [
 
 
-                label: 'Clicked',
-                data: clicked,
-                backgroundColor: '#B9ABCF',
-                borderColor: 'gray',
-                borderWidth: 1,
+                {
+                    label: 'Clicked',
+                    data: clicked,
+                    backgroundColor: '#B9ABCF',
+                    borderColor: 'gray',
+                    borderWidth: 1,
 
-            }, {
-                label: 'Shown',
-                data: shown,
-                backgroundColor: '#b3cdd1',
-                borderColor: 'gray',
-                borderWidth: 1,
+                }, {
+                    label: 'Shown',
+                    data: shown,
+                    backgroundColor: '#b3cdd1',
+                    borderColor: 'gray',
+                    borderWidth: 1,
 
 
-            }
+                },
+
+                {
+
+
+                    label: 'Clicked Percentage % ',
+                    data: shownPercentage,
+                    backgroundColor: '#ffa500',
+                    borderColor: 'gray',
+                    borderWidth: 1,
+
+                },
             ]
 
         },
@@ -279,10 +296,10 @@ function renderChart() {
             scales: {
                 yAxes: [{
                     ticks: {
-                        max: 10,
+                        max: 100,
                         min: 0,
                         beginAtZero: 0,
-                        stepSize: 2,
+                        stepSize: 5,
                     }
                 }],
 

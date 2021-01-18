@@ -1,6 +1,6 @@
 'use strict'
 
-
+// all variables definition
 var d = document;
 var generatedNumbers = [];
 
@@ -22,14 +22,15 @@ var thirdVote = d.getElementById('vote3');
 var maxRounds = 25;
 var roundCounter = 0
 var maxRounndSubmitionListener = d.getElementById('submitRoundNumber')
-maxRounndSubmitionListener.addEventListener('click', changeMaxRounds)
 
-function changeMaxRounds() {
+var product1
+var product2
+var product3
 
-    event.preventDefault();
-    maxRounds = d.getElementById('roundNumber').value;
+var generate1
+var generate2
+var generate3
 
-}
 
 var images = [
     'bag.jpg',
@@ -54,6 +55,19 @@ var images = [
     'wine-glass.jpg'
 ]
 
+// adding event listner on change rounds number  
+maxRounndSubmitionListener.addEventListener('click', changeMaxRounds)
+
+function changeMaxRounds() {
+
+    event.preventDefault();
+    maxRounds = d.getElementById('roundNumber').value;
+
+}
+
+
+// random number generator
+
 function generateRandomNumber() {
 
     var gerneratedNumber = Math.floor(Math.random() * images.length);
@@ -61,6 +75,8 @@ function generateRandomNumber() {
     return gerneratedNumber
 }
 
+
+// main class for all products
 
 function products(name, filePath) {
 
@@ -71,15 +87,9 @@ function products(name, filePath) {
 
 }
 
-var product1
-var product2
-var product3
-
-var generate1
-var generate2
-var generate3
 
 
+// initionating all the products upon the page load 
 (function () {
     var product
     for (var i = 0; i < images.length; i++) {
@@ -90,6 +100,9 @@ var generate3
     }
 
 }());
+
+
+// main rendering function for all the images 
 
 function renderer(event) {
 
@@ -211,12 +224,14 @@ function renderer(event) {
 renderer()
 renderChart()
 
+// adding click event listner on images
 
 firstVote.addEventListener('click', renderer, true)
 secondVote.addEventListener('click', renderer, true)
 thirdVote.addEventListener('click', renderer, true)
 
 
+// main chart renderer function
 function renderChart() {
     var imagesCopy = images
     imagesCopy = imagesCopy.map(val => val.slice(0, val.indexOf(".")))

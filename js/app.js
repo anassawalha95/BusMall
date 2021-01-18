@@ -4,7 +4,7 @@
 var d = document;
 var generatedNumbers = [];
 
-var allProductsObjects = []
+
 
 var firstImgName = d.getElementById('item1-name');
 var secondImgName = d.getElementById('item2-name');
@@ -55,6 +55,8 @@ var images = [
     'wine-glass.jpg'
 ]
 
+products.prototype.allProductsObjects = []
+
 // adding event listner on change rounds number  
 maxRounndSubmitionListener.addEventListener('click', changeMaxRounds)
 
@@ -84,7 +86,7 @@ function products(name, filePath) {
     this.filePath = filePath;
     this.shown = 0
     this.clicked = 0
-
+    products.prototype.allProductsObjects.push(this)
 }
 
 
@@ -95,7 +97,6 @@ function products(name, filePath) {
     for (var i = 0; i < images.length; i++) {
 
         product = new products(images[i].slice(0, images[i].indexOf(".")), `img/${images[i]}`, `img/${images[i]}`)
-        allProductsObjects.push(product)
 
     }
 
@@ -148,11 +149,11 @@ function renderer(event) {
             generatedNumbers.push(generate3)
 
 
-            product1 = allProductsObjects[generate1]
+            product1 = products.prototype.allProductsObjects[generate1]
 
-            product2 = allProductsObjects[generate2]
+            product2 = products.prototype.allProductsObjects[generate2]
 
-            product3 = allProductsObjects[generate3]
+            product3 = products.prototype.allProductsObjects[generate3]
 
 
 
@@ -198,11 +199,11 @@ function renderer(event) {
         }
 
 
-        product1 = allProductsObjects[generate1]
+        product1 = products.prototype.allProductsObjects[generate1]
 
-        product2 = allProductsObjects[generate2]
+        product2 = products.prototype.allProductsObjects[generate2]
 
-        product3 = allProductsObjects[generate3]
+        product3 = products.prototype.allProductsObjects[generate3]
 
 
         firstImgName.innerHTML = product1.name;
@@ -238,7 +239,7 @@ function renderChart() {
 
     var clicked = []
     var shown = []
-    allProductsObjects.map(val => {
+    products.prototype.allProductsObjects.map(val => {
         clicked.push(val.clicked)
         shown.push(val.shown)
     })

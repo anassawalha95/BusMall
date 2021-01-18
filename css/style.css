@@ -173,6 +173,13 @@ border-left: solid 7px #00b4db;
     border-right: solid 7px #00b4db;
 }
 
+.item-name{
+    color: rgb(48, 48, 48);
+    text-align: center;
+    font-size: 32px;
+    text-transform:capitalize ;
+    text-shadow: 0px 0px 7px  #00b4db;
+}
 .column > img{
     display: block;
     margin: 15px auto;
@@ -190,10 +197,10 @@ border-left: solid 7px #00b4db;
     text-align: center;
     padding: 20px 50px;
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: color: rgb(48, 48, 48);
     font-weight: bolder;
     cursor: pointer;
-    text-shadow: 0px 0px 1px #00b4db;
+    text-shadow: 0px 0px 7px  #00b4db;
 
 }
 .vote:hover{
@@ -207,13 +214,7 @@ border-left: solid 7px #00b4db;
 }
 
  
-.item-name{
-    color: #00b4db;
-    text-align: center;
-    font-size: 32px;
-    text-transform:capitalize ;
-    text-shadow: 0px 0px 2px  #00b4db;
-}
+
 
 .vote > i {
     color: rgb(255, 209, 124);

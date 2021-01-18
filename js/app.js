@@ -102,6 +102,8 @@ function products(name, filePath) {
 
     }
 
+    var video = document.getElementById("Video");
+    video.play();
 }());
 
 
@@ -259,9 +261,6 @@ function renderChart() {
         shown.push(val.shown)
         shownPercentage.push((val.clicked == 0 ? 0 : ((val.clicked / val.shown) * 100)))
     })
-
-    console.log(shownPercentage)
-
 
     var ctx = document.getElementById('Chart').getContext('2d');
     var myChart = new Chart(ctx, {

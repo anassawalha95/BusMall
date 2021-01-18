@@ -127,14 +127,14 @@ header{
 
 .controll-rounds-number > form> .submit-button:hover{
 
-    background-image: linear-gradient(250deg, #E8A87C, #ffe600); 
+    background-image: linear-gradient(250deg,#e98d50, #E8A87C); 
 }
 
 .controll-rounds-number > form> .submit-button:active{
 
  
    
-    background-image: linear-gradient(250deg, #E8A87C;, #ffe600); 
+    background-image: linear-gradient(250deg,#e98d50, #E8A87C); 
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.2);
   
 }
@@ -163,14 +163,13 @@ main{
 
 
 .column{
-width: 350px;
-height: 450px;
-background-color: white;
-border-radius: 5px;
-background-image: linear-gradient(315deg, #fee2f8 0%, #dcf8ef 74%);
-
-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.2);
-border-left: solid 7px #E8A87C;
+    width: 350px;
+    height: 450px;
+    background-color: #F6F4F3;
+    border-radius: 5px;
+    /* background-image: linear-gradient(315deg, #fee2f8 0%, #dcf8ef 74%); */
+    box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.2);
+    border-left: solid 7px #E8A87C;
     border-right: solid 7px #E8A87C;
 }
 
@@ -179,6 +178,7 @@ border-left: solid 7px #E8A87C;
     text-align: center;
     font-size: 32px;
     text-transform:capitalize ;
+    text-shadow: 2px 2px 3px gray
     
 }
 .column > img{

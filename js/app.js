@@ -15,9 +15,8 @@ var firstImg = d.getElementById('firstImg');
 var secondImg = d.getElementById('secondImg');
 var thirdImg = d.getElementById('thirdImg');
 
-var firstVote = d.getElementById('vote1');
-var secondVote = d.getElementById('vote2');
-var thirdVote = d.getElementById('vote3');
+var imagesSection = d.getElementById('row');
+
 
 var maxRounds = 25;
 var roundCounter = 0
@@ -32,6 +31,9 @@ var product3
 var generate1
 var generate2
 var generate3
+
+var showResults = d.getElementById("showResults")
+var statistics = d.getElementById("statistics-box")
 
 
 var images = [
@@ -92,7 +94,6 @@ function products(name, filePath) {
 }
 
 
-
 // initionating all the products upon the page load 
 (function () {
     var product
@@ -102,26 +103,28 @@ function products(name, filePath) {
 
     }
 
-    var video = document.getElementById("Video");
-    video.play();
+
 }());
 
 
 // main rendering function for all the images 
-
+var notFirstTimeFlag = false;
 function renderer(event) {
 
-    if (event) {
+    if (notFirstTimeFlag) {
+
         if (roundCounter <= maxRounds) {
             if (event.target.id == "vote1") {
                 product1.clicked++;
-            }
-            if (event.target.id == "vote2") {
-                product2.clicked++;
-            }
-            if (event.target.id == "vote3") {
-                product3.clicked++;
-            }
+            } else
+                if (event.target.id == "vote2") {
+                    product2.clicked++;
+                } else
+                    if (event.target.id == "vote3") {
+                        product3.clicked++;
+                    } else {
+                        return
+                    }
 
             product1.shown++;
             product2.shown++;
@@ -172,14 +175,11 @@ function renderer(event) {
 
             roundCounter++
 
-        } else {
-
-
-            renderChart()
         }
 
-    } else {
 
+    } else {
+        notFirstTimeFlag = true;
         generate1 = generateRandomNumber();
 
 
@@ -227,17 +227,15 @@ function renderer(event) {
 
 
 renderer()
-renderChart()
 
 // adding click event listner on images
 
-firstVote.addEventListener('click', renderer, true)
-secondVote.addEventListener('click', renderer, true)
-thirdVote.addEventListener('click', renderer, true)
+imagesSection.addEventListener('click', renderer)
+
 
 
 // adding redo listner
-redo.addEventListener('click', allowUserToRedo, true)
+redo.addEventListener('click', allowUserToRedo)
 
 function allowUserToRedo() {
 
@@ -247,100 +245,34 @@ function allowUserToRedo() {
 }
 
 
+// adding show results listener
 
-// main chart renderer function
-function renderChart() {
-    var imagesCopy = images
-    imagesCopy = imagesCopy.map(val => val.slice(0, val.indexOf(".")))
-
-    var clicked = []
-    var shown = []
-    var shownPercentage = []
-    products.prototype.allProductsObjects.map(val => {
-        clicked.push(val.clicked)
-        shown.push(val.shown)
-        shownPercentage.push((val.clicked == 0 ? 0 : ((val.clicked / val.shown) * 100)))
-    })
-
-    var ctx = document.getElementById('Chart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: imagesCopy,
-            barPercentage: 1,
-            barThickness: 6,
-            maxBarThickness: 2,
-            minBarLength: 2,
-            datasets: [
+showResults.addEventListener('click', renderProducts)
 
 
-                {
-                    label: 'Clicked',
-                    data: clicked,
-                    backgroundColor: '#B9ABCF',
-                    borderColor: 'gray',
-                    borderWidth: 1,
-
-                }, {
-                    label: 'Shown',
-                    data: shown,
-                    backgroundColor: '#b3cdd1',
-                    borderColor: 'gray',
-                    borderWidth: 1,
 
 
-                },
-
-                {
 
 
-                    label: 'Clicked Percentage % ',
-                    data: shownPercentage,
-                    backgroundColor: '#ffa500',
-                    borderColor: 'gray',
-                    borderWidth: 1,
+// main Products renderer function
+function renderProducts(e) {
 
-                },
-            ]
 
-        },
-        options: {
 
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        max: 100,
-                        min: 0,
-                        beginAtZero: 0,
-                        stepSize: 5,
-                    }
-                }],
+    e.preventDefault()
 
-            },
+    var statisticsValues = `<ul class="products-Results">`;
 
-            layout: {
-                padding: {
-                    left: 50,
-                    right: 50,
-                    top: 50,
-                    bottom: 50
-                },
+    products.prototype.allProductsObjects.map(product => statisticsValues += `<li> ${product.name} had <strong class="products-Results-vals">${product.clicked}</strong> votes, and was seen <strong class="products-Results-vals">${product.shown}</strong> times. </li> <br>  `)
+    statisticsValues += `</ul>`;
 
-            },
 
-            legend: {
-                labels: {
+    statistics.innerHTML = statisticsValues;
 
-                    fontColor: 'red',
+    maxRounndSubmitionListener.disabled
+    showResults.disabled;
 
-                }
-            }
-
-        }
-    });
-
-    myChart.canvas.parentNode.style.width = '60%';
-    myChart.canvas.parentNode.style.height = '400px';
-
+    maxRounndSubmitionListener.removeEventListener('click', renderProducts)
+    showResults.removeEventListener('click', renderProducts)
 
 }

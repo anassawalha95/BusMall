@@ -24,10 +24,7 @@
 </head>
 
 <body>
-    <video autoplay muted loop id="Video">
-        <source src="video/Setangibeach2.mp4" type="video/mp4">
 
-    </video>
     <header>
 
         <div class="logo">
@@ -43,7 +40,11 @@
             <form action="">
                 <label for="round-number" class="round-number-label">Insert the Number of Rounds</label>
                 <input type="number" id="roundNumber">
-                <input type="submit" class="submit-button" id="submitRoundNumber"> <i id="redo" class="fas fa-redo"></i>
+                <div class="button-wrapper">
+                    <input type="submit" class="submit-button" id="submitRoundNumber">
+                    <input type="button" id="showResults" class="show-results" value="Show results">
+                </div>
+                <i id="redo" class="fas fa-redo"></i>
 
             </form>
         </div>
@@ -51,7 +52,7 @@
     </header>
     <main>
         <div class="container">
-            <div class="row">
+            <div class="row" id="row">
                 <div class="column">
                     <h3 class="item-name" id="item1-name"></h3>
                     <img src="" alt="" id="firstImg">
@@ -74,7 +75,7 @@
     <footer>
         <h2 class="statistics">Statistics</h2>
         <div class="line"></div>
-        <div class="statistics-box"><canvas id="Chart"></canvas></div>
+        <div class="statistics-box" id="statistics-box"></div>
         <div class="social-media-container">
             <hr>
             <i class="fab fa-facebook-square"></i>

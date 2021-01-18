@@ -11,32 +11,15 @@ body{
 header{
     display: block;
     min-width: 100%;
-    height: 100%;
-   
- z-index: 2;
-
-}
-
-#Video{
-    
-    position: absolute;
-   min-width: auto;
-    
-    left: 0;
-    top: 0;
-    bottom: 0;
-    z-index: -2;
+    height: 640px;
+    background-image: linear-gradient(to right, #ff5f6d, #ffc371,#ff5f6d);
+    z-index: 2;
 
     border-bottom-left-radius: 100% 130px;
     border-bottom-right-radius: 100% 130px;
 
-    right: 0;
-    bottom: 0;
-    min-width: 100%; 
-    max-width: 100%; 
-    min-height: 100%;
-
 }
+
 
 .logo{
 
@@ -92,7 +75,7 @@ header{
     display: block;
     margin: 25px auto;
     width: 500px;
-    height: 185px;
+    height: 250px;
     background-color: #f6f4f3;
     border-radius: 7px;
     text-align: center;
@@ -136,22 +119,62 @@ header{
     
 }
 
+.button-wrapper{
+    display: inline-block;
+}
 
-.controll-rounds-number > form> .submit-button{
+ .submit-button{
     display: inline-block;
 
     margin-top: 15px;
-    padding: 10px 67px;
+    padding: 10px 10px;
     border: none;
     color: white;
     border-radius: 2px;
     background-image: linear-gradient(50deg, #E8A87C, #e98d50);
-
+    padding: 10px 10px;
+    width: 165px;
     box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.2);
     cursor: pointer;
     transition: 1s;
 }
 
+.show-results{
+
+    display:block;
+    margin: auto;
+    margin-top: 15px;
+    padding: 10px 0px;
+    border: none;
+    color: white;
+    border-radius: 2px;
+    background-image: linear-gradient(50deg, #7eb2ff, #0b75ff);
+    width: 165px;
+    box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: 1s;
+
+    text-decoration: none;
+
+}
+
+
+
+
+ 
+
+ .submit-button:hover{
+
+    background-image: linear-gradient(250deg,#e98d50, #E8A87C); 
+}
+.submit-button:active{
+
+ 
+   
+    background-image: linear-gradient(250deg,#e98d50, #E8A87C); 
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.2);
+  
+}
 #redo{
    
     
@@ -167,25 +190,6 @@ header{
     
 }
 
-
-
- 
-
-
-.controll-rounds-number > form> .submit-button:hover{
-
-    background-image: linear-gradient(250deg,#e98d50, #E8A87C); 
-}
-
-.controll-rounds-number > form> .submit-button:active{
-
- 
-   
-    background-image: linear-gradient(250deg,#e98d50, #E8A87C); 
-    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.2);
-  
-}
-
 main{   
 
     display: block;
@@ -197,18 +201,17 @@ main{
 
 .container{
     display: block;
-    
-    
-    
     width: 100%;
-    
-    
+
+    margin-top: -65px;
+   
 }
 
 .row{
     display: flex;
     align-items: center;
     justify-content: space-around;
+    margin-bottom: -60px;   
 }
 
 
@@ -340,7 +343,18 @@ main{
     
 }
 
+.products-Results{
+    margin-top: 20px;
+    text-align: center;
+    text-transform:capitalize ;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 22px;
+    font-weight: bolder;
+}
 
+.products-Results-vals{
+    color: #E8A87C;
+}
 .line{
     background-color:#E8A87C;
     width: 300px;

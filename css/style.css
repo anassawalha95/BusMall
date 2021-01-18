@@ -7,13 +7,34 @@ body{
 
 }
 
+
 header{
-    width: 100%;
-    height: 580px;
-    background-image:   linear-gradient(to right,#E27D5F  , #E8A87C,#E27D5F );
+    display: block;
+    min-width: 100%;
+    height: 100%;
+   
+ z-index: 2;
+
+}
+
+#Video{
     
+    position: absolute;
+   min-width: auto;
+    
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -2;
 
+    border-bottom-left-radius: 100% 130px;
+    border-bottom-right-radius: 100% 130px;
 
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    max-width: 100%; 
+    min-height: 100%;
 
 }
 
@@ -35,10 +56,13 @@ header{
     color: white;
     letter-spacing: 7px;
     
+    
 }
 
 
 .sub-logo-first{
+    display: block;
+    margin: auto;
     text-align: center;
     font-family: "Raleway", sans-serif;
     font-size: 55px;
@@ -49,6 +73,8 @@ header{
 }
 
 .sub-logo-second{
+    display: block;
+    margin: auto;
     margin-top: 10px;
     text-align: center;
     font-family: 'Righteous', cursive;
@@ -59,6 +85,7 @@ header{
 
 
 }
+
 
 .controll-rounds-number{
 
@@ -85,6 +112,7 @@ header{
     letter-spacing: 5px;
     font-family: 'Oswald', sans-serif;
     font-weight: 300;
+    
 
     
 }
@@ -135,9 +163,14 @@ header{
 
 #redo:hover{
    cursor: pointer;
-   animation: rotating 1s linear infinite; ;
+   animation: rotating 1s linear infinite ;
     
 }
+
+
+
+ 
+
 
 .controll-rounds-number > form> .submit-button:hover{
 
@@ -153,32 +186,35 @@ header{
   
 }
 
+main{   
 
-main{
+    display: block;
+    z-index: 2;
+    margin: auto;
     
-    height: 540px;
+    
 }
 
 .container{
-    z-index: 2;
-    bottom: 48px;
-    position: relative;
+    display: block;
+    
+    
+    
     width: 100%;
-    height: 350px;
+    
     
 }
 
 .row{
     display: flex;
     align-items: center;
-
     justify-content: space-around;
 }
 
 
 .column{
     width: 350px;
-    height: 450px;
+    height: 460px;
     background-color: #F6F4F3;
     border-radius: 5px;
     /* background-image: linear-gradient(315deg, #fee2f8 0%, #dcf8ef 74%); */
@@ -187,12 +223,24 @@ main{
     border-right: solid 7px #E8A87C;
 }
 
+
+
+/* @keyframes upAndDown {
+    0%   {margin-top: -10px;}
+    50%  {margin-top: 25px;}
+    100%  {margin-top: -10px;}
+   
+  
+} */
+
+
 .item-name{
     color: #E8A87C;
     text-align: center;
     font-size: 32px;
     text-transform:capitalize ;
-    text-shadow: 2px 2px 3px gray
+    text-shadow: 2px 2px 3px gray;
+    margin-top: 9px;
     
 }
 .column > img{
@@ -207,25 +255,28 @@ main{
 }
 
 .vote{
+ 
     display: block;
     margin: 0 auto;
+
     text-align: center;
-    padding: 20px 50px;
+    padding: 20px  0;
     text-decoration: none;
      color: #E8A87C;
     font-weight: bolder;
     cursor: pointer;
-    
+    width: 90%;
 
 }
 .vote:hover{
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-    padding: 20px 50px;
+   
+  
+    
     text-decoration: none;
     animation: changingBackGroundColor cubic-bezier(.17,.67,.91,.39) 5s   ;
     background-color: #0083b0;
+  
+   
 }
 
  
@@ -234,14 +285,14 @@ main{
 .vote > i {
     color: rgb(255, 209, 124);
     animation: rotating 2s linear infinite;
+   z-index: 3;
     
 }
 
 .vote > i:hover {
     color: lightblue;
 
-    animation: rotating 1s linear infinite;
-    
+       
 }
 
 @keyframes rotating {

@@ -96,23 +96,18 @@ function renderer(event) {
     if (event) {
         if (roundCounter <= maxRounds) {
             if (event.target.id == "vote1") {
-                product1.shown++;
                 product1.clicked++;
-
-
             }
             if (event.target.id == "vote2") {
-                product2.shown++;
                 product2.clicked++;
-
             }
             if (event.target.id == "vote3") {
-                product3.shown++;
                 product3.clicked++;
-
-
             }
 
+            product1.shown++;
+            product2.shown++;
+            product3.shown++;
 
             generate1 = generateRandomNumber();
             generate2 = generateRandomNumber();
@@ -243,6 +238,15 @@ function renderChart() {
             maxBarThickness: 2,
             minBarLength: 2,
             datasets: [{
+
+
+                label: 'Clicked',
+                data: clicked,
+                backgroundColor: '#B9ABCF',
+                borderColor: 'gray',
+                borderWidth: 1,
+
+            }, {
                 label: 'Shown',
                 data: shown,
                 backgroundColor: '#b3cdd1',
@@ -250,15 +254,9 @@ function renderChart() {
                 borderWidth: 1,
 
 
-            },
-            {
-                label: 'Clicked',
-                data: clicked,
-                backgroundColor: '#B9ABCF',
-                borderColor: 'gray',
-                borderWidth: 1,
+            }
+            ]
 
-            }]
         },
         options: {
 

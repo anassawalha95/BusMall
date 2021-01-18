@@ -58,7 +58,7 @@ var images = [
 // adding event listner on change rounds number  
 maxRounndSubmitionListener.addEventListener('click', changeMaxRounds)
 
-function changeMaxRounds() {
+function changeMaxRounds(event) {
 
     event.preventDefault();
     maxRounds = d.getElementById('roundNumber').value;

@@ -4,8 +4,6 @@
 var d = document;
 var generatedNumbers = [];
 
-
-
 var firstImgName = d.getElementById('item1-name');
 var secondImgName = d.getElementById('item2-name');
 var thirdImgName = d.getElementById('item3-name');

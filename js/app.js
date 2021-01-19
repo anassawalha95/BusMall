@@ -17,9 +17,9 @@ var thirdImg = d.getElementById('thirdImg');
 
 var imagesSection = d.getElementById('row');
 
-
 var maxRounds = 25;
 var roundCounter = 0
+var roundNumber = d.getElementById('roundNumber')
 var maxRounndSubmitionListener = d.getElementById('submitRoundNumber')
 
 var redo = d.getElementById('redo');
@@ -67,7 +67,7 @@ maxRounndSubmitionListener.addEventListener('click', changeMaxRounds)
 function changeMaxRounds(event) {
 
     event.preventDefault();
-    maxRounds = d.getElementById('roundNumber').value;
+    maxRounds = roundNumber.value;
 
 }
 
@@ -94,6 +94,7 @@ function products(name, filePath) {
 }
 
 
+
 // initionating all the products upon the page load 
 (function () {
     var product
@@ -103,11 +104,13 @@ function products(name, filePath) {
 
     }
 
-
+    var video = document.getElementById("Video");
+    video.play();
 }());
 
 
 // main rendering function for all the images 
+
 var notFirstTimeFlag = false;
 function renderer(event) {
 
@@ -226,16 +229,17 @@ function renderer(event) {
 }
 
 
+
+
 renderer()
+renderChart()
 
 // adding click event listner on images
 
 imagesSection.addEventListener('click', renderer)
 
-
-
 // adding redo listner
-redo.addEventListener('click', allowUserToRedo)
+redo.addEventListener('click', allowUserToRedo, true)
 
 function allowUserToRedo() {
 
@@ -245,34 +249,125 @@ function allowUserToRedo() {
 }
 
 
+
 // adding show results listener
-
-showResults.addEventListener('click', renderProducts)
-
+showResults.addEventListener('click', renderChart)
 
 
-
-
-
-// main Products renderer function
-function renderProducts(e) {
+// main chart renderer function
+function renderChart(e) {
 
 
 
-    e.preventDefault()
+    var imagesCopy = images
+    imagesCopy = imagesCopy.map(val => val.slice(0, val.indexOf(".")))
 
-    var statisticsValues = `<ul class="products-Results">`;
+    var clicked = []
+    var shown = []
+    var shownPercentage = []
+    products.prototype.allProductsObjects.map(val => {
+        clicked.push(val.clicked)
+        shown.push(val.shown)
+        shownPercentage.push((val.clicked == 0 ? 0 : ((val.clicked / val.shown) * 100)))
+    })
 
-    products.prototype.allProductsObjects.map(product => statisticsValues += `<li> ${product.name} had <strong class="products-Results-vals">${product.clicked}</strong> votes, and was seen <strong class="products-Results-vals">${product.shown}</strong> times. </li> <br>  `)
-    statisticsValues += `</ul>`;
+    var ctx = document.getElementById('Chart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: imagesCopy,
+            barPercentage: 1,
+            barThickness: 6,
+            maxBarThickness: 2,
+            minBarLength: 2,
+            datasets: [
 
 
-    statistics.innerHTML = statisticsValues;
+                {
+                    label: 'Clicked',
+                    data: clicked,
+                    backgroundColor: '#B9ABCF',
+                    borderColor: 'gray',
+                    borderWidth: 1,
 
-    maxRounndSubmitionListener.disabled
-    showResults.disabled;
+                }, {
+                    label: 'Shown',
+                    data: shown,
+                    backgroundColor: '#b3cdd1',
+                    borderColor: 'gray',
+                    borderWidth: 1,
 
-    maxRounndSubmitionListener.removeEventListener('click', renderProducts)
-    showResults.removeEventListener('click', renderProducts)
+
+                },
+
+                {
+
+
+                    label: 'Clicked Percentage % ',
+                    data: shownPercentage,
+                    backgroundColor: '#ffa500',
+                    borderColor: 'gray',
+                    borderWidth: 1,
+
+                },
+            ]
+
+        },
+        options: {
+
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        max: 100,
+                        min: 0,
+                        beginAtZero: 0,
+                        stepSize: 5,
+                    }
+                }],
+
+            },
+
+            layout: {
+                padding: {
+                    left: 50,
+                    right: 50,
+                    top: 50,
+                    bottom: 50
+                },
+
+            },
+
+            legend: {
+                labels: {
+
+                    fontColor: 'red',
+
+                }
+            }
+
+        }
+    });
+
+    myChart.canvas.parentNode.style.width = '60%';
+    myChart.canvas.parentNode.style.height = '400px';
+
+    if (e) {
+        e.preventDefault()
+
+        roundNumber.disabled = true;
+
+        maxRounndSubmitionListener.disabled = true;
+        showResults.disabled = true;
+
+        maxRounndSubmitionListener.style.opacity = 0.3;
+        showResults.style.opacity = 0.3;
+
+        maxRounndSubmitionListener.style.cursor = "initial";
+        showResults.style.cursor = "initial";
+
+
+        showResults.removeEventListener('click', renderChart)
+        maxRounds = 0
+    }
 
 }

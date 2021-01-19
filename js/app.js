@@ -67,7 +67,7 @@ maxRounndSubmitionListener.addEventListener('click', changeMaxRounds)
 function changeMaxRounds(event) {
 
     event.preventDefault();
-    maxRounds = roundNumber.value;
+    maxRounds = parseInt(roundNumber.value);
 
 }
 
@@ -318,7 +318,7 @@ function renderChart(e) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        max: 100,
+                        max: maxRounds,
                         min: 0,
                         beginAtZero: 0,
                         stepSize: 5,
@@ -353,21 +353,17 @@ function renderChart(e) {
 
     if (e) {
         e.preventDefault()
-
         roundNumber.disabled = true;
-
         maxRounndSubmitionListener.disabled = true;
         showResults.disabled = true;
-
         maxRounndSubmitionListener.style.opacity = 0.3;
         showResults.style.opacity = 0.3;
-
         maxRounndSubmitionListener.style.cursor = "initial";
         showResults.style.cursor = "initial";
-
-
         showResults.removeEventListener('click', renderChart)
-        maxRounds = 0
+        maxRounds = 0;
     }
+
+
 
 }

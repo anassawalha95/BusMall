@@ -362,8 +362,34 @@ function renderChart(e) {
         showResults.style.cursor = "initial";
         showResults.removeEventListener('click', renderChart)
         maxRounds = 0;
+
+        saveProductsLocally()
     }
 
 
+
+}
+
+
+function saveProductsLocally() {
+
+    var storage = window.localStorage;
+
+    var productsStorage = products.prototype.allProductsObjects
+    var oldProductsStorage = JSON.parse(storage.getItem("Products Storage"))
+
+
+
+    if (oldProductsStorage !== null) {
+        oldProductsStorage.map((oldProduct, index) => {
+            productsStorage[index].shown += oldProduct.shown;
+            productsStorage[index].clicked += oldProduct.clicked;
+
+        })
+    }
+
+    storage.setItem("Products Storage", JSON.stringify(productsStorage));
+
+    console.log(JSON.parse(storage.getItem("Products Storage")))
 
 }

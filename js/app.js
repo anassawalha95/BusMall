@@ -82,7 +82,7 @@ function generateRandomNumber() {
 }
 
 
-// main class for all products
+// main class for all products 
 
 function products(name, filePath) {
 
@@ -95,7 +95,7 @@ function products(name, filePath) {
 
 
 
-// initionating all the products upon the page load 
+// initiate all the products upon the page load 
 (function () {
     var product
     for (var i = 0; i < images.length; i++) {

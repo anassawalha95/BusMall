@@ -90,6 +90,7 @@ function products(name, filePath) {
     for (var i = 0; i < images.length; i++) {
         product = new products(images[i].slice(0, images[i].indexOf(".")), `img/${images[i]}`, `img/${images[i]}`)
     }
+    // adding a play when the page load
     var video = document.getElementById("Video");
     video.play();
 }());

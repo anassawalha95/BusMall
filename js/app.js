@@ -17,9 +17,9 @@ var thirdImg = d.getElementById('thirdImg');
 
 var imagesSection = d.getElementById('row');
 
-
 var maxRounds = 25;
 var roundCounter = 0
+var roundNumber = d.getElementById('roundNumber')
 var maxRounndSubmitionListener = d.getElementById('submitRoundNumber')
 
 var redo = d.getElementById('redo');
@@ -34,7 +34,6 @@ var generate3
 
 var showResults = d.getElementById("showResults")
 var statistics = d.getElementById("statistics-box")
-
 
 var images = [
     'bag.jpg',
@@ -59,33 +58,26 @@ var images = [
     'wine-glass.jpg'
 ]
 
-products.prototype.allProductsObjects = []
-
 // adding event listner on change rounds number  
 maxRounndSubmitionListener.addEventListener('click', changeMaxRounds)
 
 function changeMaxRounds(event) {
-
     event.preventDefault();
-    maxRounds = d.getElementById('roundNumber').value;
-
+    maxRounds = parseInt(roundNumber.value);
 }
 
-
 // random number generator
-
 function generateRandomNumber() {
-
     var gerneratedNumber = Math.floor(Math.random() * images.length);
-
     return gerneratedNumber
 }
 
 
 // main class for all products
+products.prototype.allProductsObjects = []
+
 
 function products(name, filePath) {
-
     this.name = name;
     this.filePath = filePath;
     this.shown = 0
@@ -94,25 +86,23 @@ function products(name, filePath) {
 }
 
 
+
 // initionate all the products upon the page load 
+
 (function () {
     var product
     for (var i = 0; i < images.length; i++) {
-
         product = new products(images[i].slice(0, images[i].indexOf(".")), `img/${images[i]}`, `img/${images[i]}`)
-
     }
-
-
+    // adding a play when the page load
+    var video = document.getElementById("Video");
+    video.play();
 }());
-
 
 // main rendering function for all the images 
 var notFirstTimeFlag = false;
 function renderer(event) {
-
     if (notFirstTimeFlag) {
-
         if (roundCounter <= maxRounds) {
             if (event.target.id == "vote1") {
                 product1.clicked++;
@@ -125,7 +115,6 @@ function renderer(event) {
                     } else {
                         return
                     }
-
             product1.shown++;
             product2.shown++;
             product3.shown++;
@@ -142,28 +131,19 @@ function renderer(event) {
                 || generatedNumbers.includes(generate3)) {
 
                 generate1 = generateRandomNumber();
-
-
                 generate2 = generateRandomNumber();
-
-
                 generate3 = generateRandomNumber();
 
             }
+
             generatedNumbers = []
             generatedNumbers.push(generate1)
             generatedNumbers.push(generate2)
             generatedNumbers.push(generate3)
 
-
             product1 = products.prototype.allProductsObjects[generate1]
-
             product2 = products.prototype.allProductsObjects[generate2]
-
             product3 = products.prototype.allProductsObjects[generate3]
-
-
-
 
             firstImgName.innerHTML = product1.name;
             secondImgName.innerHTML = product2.name;
@@ -174,18 +154,13 @@ function renderer(event) {
             thirdImg.setAttribute('src', product3.filePath)
 
             roundCounter++
-
         }
-
 
     } else {
         notFirstTimeFlag = true;
+
         generate1 = generateRandomNumber();
-
-
         generate2 = generateRandomNumber();
-
-
         generate3 = generateRandomNumber();
 
         while (generate1 == generate2
@@ -202,13 +177,9 @@ function renderer(event) {
 
         }
 
-
         product1 = products.prototype.allProductsObjects[generate1]
-
         product2 = products.prototype.allProductsObjects[generate2]
-
         product3 = products.prototype.allProductsObjects[generate3]
-
 
         firstImgName.innerHTML = product1.name;
         secondImgName.innerHTML = product2.name;
@@ -220,59 +191,170 @@ function renderer(event) {
 
         roundCounter++;
     }
-
-
-
 }
-
-
-renderer()
 
 // adding click event listner on images
 
 imagesSection.addEventListener('click', renderer)
 
-
-
 // adding redo listner
-redo.addEventListener('click', allowUserToRedo)
-
+redo.addEventListener('click', allowUserToRedo, true)
 function allowUserToRedo() {
-
     location.reload();
-
-
 }
-
 
 // adding show results listener
+showResults.addEventListener('click', renderChart)
 
-showResults.addEventListener('click', renderProducts)
+// main chart renderer function
+function renderChart(e) {
 
-
-
-
-
-
-// main Products renderer function
-function renderProducts(e) {
-
-
-
-    e.preventDefault()
-
-    var statisticsValues = `<ul class="products-Results">`;
-
-    products.prototype.allProductsObjects.map(product => statisticsValues += `<li> ${product.name} had <strong class="products-Results-vals">${product.clicked}</strong> votes, and was seen <strong class="products-Results-vals">${product.shown}</strong> times. </li> <br>  `)
-    statisticsValues += `</ul>`;
+    var lastProdutcsStorage
+    var ctx = ""
+    var myChart = ""
+    var clicked = []
+    var shown = []
+    var shownPercentage = []
+    var imagesLabel = []
 
 
-    statistics.innerHTML = statisticsValues;
+    lastProdutcsStorage = saveProductsLocally(e)
 
-    maxRounndSubmitionListener.disabled
-    showResults.disabled;
+    showResults.scrollIntoView()
 
-    maxRounndSubmitionListener.removeEventListener('click', renderProducts)
-    showResults.removeEventListener('click', renderProducts)
+
+
+    lastProdutcsStorage.map(val => {
+        clicked.push(val.clicked)
+        shown.push(val.shown)
+        imagesLabel.push(val.name)
+        shownPercentage.push((val.clicked == 0 ? 0 : ((val.clicked / val.shown) * 100)))
+
+    })
+
+
+    if (e) {
+        e.preventDefault()
+        roundNumber.disabled = true;
+        maxRounndSubmitionListener.disabled = true;
+        showResults.disabled = true;
+        maxRounndSubmitionListener.style.opacity = 0.3;
+        showResults.style.opacity = 0.3;
+        maxRounndSubmitionListener.style.cursor = "initial";
+        showResults.style.cursor = "initial";
+        showResults.removeEventListener('click', renderChart)
+        maxRounds = 0;
+    }
+
+    ctx = document.getElementById('Chart').getContext('2d');
+    myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: imagesLabel,
+            barPercentage: 1,
+            barThickness: 6,
+            maxBarThickness: 2,
+            minBarLength: 2,
+            datasets: [
+
+
+                {
+                    label: 'Clicked',
+                    data: clicked,
+                    backgroundColor: '#B9ABCF',
+                    borderColor: 'gray',
+                    borderWidth: 1,
+
+                }, {
+                    label: 'Shown',
+                    data: shown,
+                    backgroundColor: '#b3cdd1',
+                    borderColor: 'gray',
+                    borderWidth: 1,
+
+
+                },
+
+                {
+
+
+                    label: 'Clicked Percentage % ',
+                    data: shownPercentage,
+                    backgroundColor: '#ffa500',
+                    borderColor: 'gray',
+                    borderWidth: 1,
+
+                },
+            ]
+
+        },
+        options: {
+
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        max: 100,
+                        min: 0,
+                        beginAtZero: 0,
+                        stepSize: 5,
+                    }
+                }],
+
+            },
+
+            layout: {
+                padding: {
+                    left: 50,
+                    right: 50,
+                    top: 50,
+                    bottom: 50
+                },
+
+            },
+
+            legend: {
+                labels: {
+
+                    fontColor: 'red',
+
+                }
+            }
+
+        }
+    });
+
+    myChart.canvas.parentNode.style.width = '60%';
+    myChart.canvas.parentNode.style.height = '400px';
+
+
 
 }
+
+
+function saveProductsLocally(e) {
+
+    var storage = window.localStorage;
+    var productsStorage = products.prototype.allProductsObjects
+    var oldProductsStorage = JSON.parse(storage.getItem("Products Storage"))
+
+    if (oldProductsStorage !== null && !e) {
+        productsStorage = oldProductsStorage
+
+    }
+
+    if (oldProductsStorage !== null && e) {
+        oldProductsStorage.map((oldProduct, index) => {
+            productsStorage[index].shown += oldProduct.shown;
+            productsStorage[index].clicked += oldProduct.clicked;
+        })
+    }
+
+    storage.setItem("Products Storage", JSON.stringify(productsStorage));
+    console.log(JSON.parse(storage.getItem("Products Storage")))
+    return productsStorage
+}
+
+
+
+renderer()
+renderChart()

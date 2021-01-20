@@ -86,7 +86,8 @@ function products(name, filePath) {
 }
 
 
-// initionating all the products upon the page load 
+
+// initionate all the products upon the page load 
 
 (function () {
     var product

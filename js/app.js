@@ -76,6 +76,7 @@ function generateRandomNumber() {
 // main class for all products
 products.prototype.allProductsObjects = []
 
+
 function products(name, filePath) {
     this.name = name;
     this.filePath = filePath;
@@ -84,7 +85,9 @@ function products(name, filePath) {
     products.prototype.allProductsObjects.push(this)
 }
 
+
 // initionating all the products upon the page load 
+
 (function () {
     var product
     for (var i = 0; i < images.length; i++) {

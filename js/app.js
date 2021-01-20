@@ -203,9 +203,10 @@ showResults.addEventListener('click', renderChart)
 
 // main chart renderer function
 function renderChart(e) {
+
     var lastProdutcsStorage
-    var ctx = document.getElementById('Chart').getContext('2d');
-    var myChart
+    var ctx = ""
+    var myChart = ""
     var clicked = []
     var shown = []
     var shownPercentage = []
@@ -214,7 +215,9 @@ function renderChart(e) {
 
     lastProdutcsStorage = saveProductsLocally(e)
 
-    ctx.innerHTML = ""
+    showResults.scrollIntoView()
+
+
 
     lastProdutcsStorage.map(val => {
         clicked.push(val.clicked)
@@ -236,10 +239,9 @@ function renderChart(e) {
         showResults.style.cursor = "initial";
         showResults.removeEventListener('click', renderChart)
         maxRounds = 0;
-
-
     }
 
+    ctx = document.getElementById('Chart').getContext('2d');
     myChart = new Chart(ctx, {
         type: 'bar',
         data: {

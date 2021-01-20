@@ -94,7 +94,7 @@ function products(name, filePath) {
 }
 
 
-// initionating all the products upon the page load 
+// initionate all the products upon the page load 
 (function () {
     var product
     for (var i = 0; i < images.length; i++) {

@@ -35,7 +35,6 @@ var generate3
 var showResults = d.getElementById("showResults")
 var statistics = d.getElementById("statistics-box")
 
-
 var images = [
     'bag.jpg',
     'banana.jpg',
@@ -59,33 +58,26 @@ var images = [
     'wine-glass.jpg'
 ]
 
-products.prototype.allProductsObjects = []
-
 // adding event listner on change rounds number  
 maxRounndSubmitionListener.addEventListener('click', changeMaxRounds)
 
 function changeMaxRounds(event) {
-
     event.preventDefault();
-    maxRounds = roundNumber.value;
-
+    maxRounds = parseInt(roundNumber.value);
 }
 
-
 // random number generator
-
 function generateRandomNumber() {
-
     var gerneratedNumber = Math.floor(Math.random() * images.length);
-
     return gerneratedNumber
 }
 
 
-// main class for all products 
+// main class for all products
+products.prototype.allProductsObjects = []
+
 
 function products(name, filePath) {
-
     this.name = name;
     this.filePath = filePath;
     this.shown = 0
@@ -94,28 +86,21 @@ function products(name, filePath) {
 }
 
 
+// initionating all the products upon the page load 
 
-// initiate all the products upon the page load 
 (function () {
     var product
     for (var i = 0; i < images.length; i++) {
-
         product = new products(images[i].slice(0, images[i].indexOf(".")), `img/${images[i]}`, `img/${images[i]}`)
-
     }
-
     var video = document.getElementById("Video");
     video.play();
 }());
 
-
 // main rendering function for all the images 
-
 var notFirstTimeFlag = false;
 function renderer(event) {
-
     if (notFirstTimeFlag) {
-
         if (roundCounter <= maxRounds) {
             if (event.target.id == "vote1") {
                 product1.clicked++;
@@ -128,7 +113,6 @@ function renderer(event) {
                     } else {
                         return
                     }
-
             product1.shown++;
             product2.shown++;
             product3.shown++;
@@ -145,28 +129,19 @@ function renderer(event) {
                 || generatedNumbers.includes(generate3)) {
 
                 generate1 = generateRandomNumber();
-
-
                 generate2 = generateRandomNumber();
-
-
                 generate3 = generateRandomNumber();
 
             }
+
             generatedNumbers = []
             generatedNumbers.push(generate1)
             generatedNumbers.push(generate2)
             generatedNumbers.push(generate3)
 
-
             product1 = products.prototype.allProductsObjects[generate1]
-
             product2 = products.prototype.allProductsObjects[generate2]
-
             product3 = products.prototype.allProductsObjects[generate3]
-
-
-
 
             firstImgName.innerHTML = product1.name;
             secondImgName.innerHTML = product2.name;
@@ -177,18 +152,13 @@ function renderer(event) {
             thirdImg.setAttribute('src', product3.filePath)
 
             roundCounter++
-
         }
-
 
     } else {
         notFirstTimeFlag = true;
+
         generate1 = generateRandomNumber();
-
-
         generate2 = generateRandomNumber();
-
-
         generate3 = generateRandomNumber();
 
         while (generate1 == generate2
@@ -205,13 +175,9 @@ function renderer(event) {
 
         }
 
-
         product1 = products.prototype.allProductsObjects[generate1]
-
         product2 = products.prototype.allProductsObjects[generate2]
-
         product3 = products.prototype.allProductsObjects[generate3]
-
 
         firstImgName.innerHTML = product1.name;
         secondImgName.innerHTML = product2.name;
@@ -223,16 +189,7 @@ function renderer(event) {
 
         roundCounter++;
     }
-
-
-
 }
-
-
-
-
-renderer()
-renderChart()
 
 // adding click event listner on images
 
@@ -240,42 +197,58 @@ imagesSection.addEventListener('click', renderer)
 
 // adding redo listner
 redo.addEventListener('click', allowUserToRedo, true)
-
 function allowUserToRedo() {
-
     location.reload();
-
-
 }
-
-
 
 // adding show results listener
 showResults.addEventListener('click', renderChart)
 
-
 // main chart renderer function
 function renderChart(e) {
 
-
-
-    var imagesCopy = images
-    imagesCopy = imagesCopy.map(val => val.slice(0, val.indexOf(".")))
-
+    var lastProdutcsStorage
+    var ctx = ""
+    var myChart = ""
     var clicked = []
     var shown = []
     var shownPercentage = []
-    products.prototype.allProductsObjects.map(val => {
+    var imagesLabel = []
+
+
+    lastProdutcsStorage = saveProductsLocally(e)
+
+    showResults.scrollIntoView()
+
+
+
+    lastProdutcsStorage.map(val => {
         clicked.push(val.clicked)
         shown.push(val.shown)
+        imagesLabel.push(val.name)
         shownPercentage.push((val.clicked == 0 ? 0 : ((val.clicked / val.shown) * 100)))
+
     })
 
-    var ctx = document.getElementById('Chart').getContext('2d');
-    var myChart = new Chart(ctx, {
+
+    if (e) {
+        e.preventDefault()
+        roundNumber.disabled = true;
+        maxRounndSubmitionListener.disabled = true;
+        showResults.disabled = true;
+        maxRounndSubmitionListener.style.opacity = 0.3;
+        showResults.style.opacity = 0.3;
+        maxRounndSubmitionListener.style.cursor = "initial";
+        showResults.style.cursor = "initial";
+        showResults.removeEventListener('click', renderChart)
+        maxRounds = 0;
+    }
+
+    ctx = document.getElementById('Chart').getContext('2d');
+    myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: imagesCopy,
+            labels: imagesLabel,
             barPercentage: 1,
             barThickness: 6,
             maxBarThickness: 2,
@@ -351,23 +324,35 @@ function renderChart(e) {
     myChart.canvas.parentNode.style.width = '60%';
     myChart.canvas.parentNode.style.height = '400px';
 
-    if (e) {
-        e.preventDefault()
 
-        roundNumber.disabled = true;
-
-        maxRounndSubmitionListener.disabled = true;
-        showResults.disabled = true;
-
-        maxRounndSubmitionListener.style.opacity = 0.3;
-        showResults.style.opacity = 0.3;
-
-        maxRounndSubmitionListener.style.cursor = "initial";
-        showResults.style.cursor = "initial";
-
-
-        showResults.removeEventListener('click', renderChart)
-        maxRounds = 0
-    }
 
 }
+
+
+function saveProductsLocally(e) {
+
+    var storage = window.localStorage;
+    var productsStorage = products.prototype.allProductsObjects
+    var oldProductsStorage = JSON.parse(storage.getItem("Products Storage"))
+
+    if (oldProductsStorage !== null && !e) {
+        productsStorage = oldProductsStorage
+
+    }
+
+    if (oldProductsStorage !== null && e) {
+        oldProductsStorage.map((oldProduct, index) => {
+            productsStorage[index].shown += oldProduct.shown;
+            productsStorage[index].clicked += oldProduct.clicked;
+        })
+    }
+
+    storage.setItem("Products Storage", JSON.stringify(productsStorage));
+    console.log(JSON.parse(storage.getItem("Products Storage")))
+    return productsStorage
+}
+
+
+
+renderer()
+renderChart()

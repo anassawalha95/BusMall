@@ -11,7 +11,7 @@ body{
 
 }
 
-
+/* scroll bar style */
 body::-webkit-scrollbar {
     width: 20px;
    
@@ -39,7 +39,7 @@ body::-webkit-scrollbar {
   }
 
  
-
+/* header style */
 
 header{
     display: block;
@@ -118,7 +118,7 @@ header{
 
 }
 
-
+/* form style  */
 .controll-rounds-number{
 
     display: block;
@@ -242,6 +242,8 @@ header{
   
 }
 
+
+/* pictures style */
 main{   
 
     display: block;
@@ -281,13 +283,6 @@ main{
 
 
 
-/* @keyframes upAndDown {
-    0%   {margin-top: -10px;}
-    50%  {margin-top: 25px;}
-    100%  {margin-top: -10px;}
-   
-  
-} */
 
 
 .item-name{
@@ -373,7 +368,7 @@ main{
 
 
 
-
+/* footer statistics styles */
 .statistics{
     display: block;
     padding: 25px;
